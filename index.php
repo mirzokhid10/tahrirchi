@@ -20,10 +20,11 @@
 
     if (isset($_POST['bosing'])) {
       $text = $_POST['inputtext'];
-      $result = conText($text);
+      $conversionType = $_POST['select'];
+      $result = conText($text, $conversionType);
     }
 
-    function conText($text) {
+    function conText($text, $conversionType) {
       $krill = [
           "№" => "#", "Ц" => "Ts", "Ё" => "Yo", "Е" => "Ye", "Ю" => "Yu", "Э" => "E", "Я" => "Ya",
           "Ҳ" => "H", "Ў" => "O‘", "Қ" => "Q", "Ғ" => "G‘", "Щ" => "Sh", "Ъ" => "’",
@@ -39,17 +40,16 @@
       ];
 
       $latin = array_flip($krill);
-      $harf1 = mb_substr($text, 0, 1);
 
-      if (isset($krill[$harf1])) {
-          $conText = strtr($text, $krill);
-      } elseif (isset($latin[$harf1])) {
-          $conText = strtr($text, $latin);
+      if ($conversionType === 'lotincha') {
+          $convertedText = strtr($text, $krill);
+      } elseif ($conversionType === 'krillcha') {
+          $convertedText = strtr($text, $latin);
       } else {
-          $conText = "Krillcha yoki lotin tilida yozing";
+          $convertedText = "Krillcha yoki lotin tilida yozing";
       }
       
-      return $conText;
+      return $convertedText;
     }
   ?>
 
@@ -112,7 +112,7 @@
             <form action="" method="post">
               <div class="converter-input">
                 <input type="radio" name="select" id="option-1" value="lotincha" checked>
-                <input type="radio" name="select" id="option-2" value="krillcha">
+                <input type="radio" name="select" id="option-2" value="krillcha" checked>
                   <label for="option-1" class="option option-1">
                       <span>Lotincha</span>
                   </label>
