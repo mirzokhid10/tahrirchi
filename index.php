@@ -15,40 +15,42 @@
 </head>
 <body>
   <?php 
-  if (isset($_POST['bosing'])) {
-    $text = $_POST['latin'];
-    $result = conText($text);
-  }
+    $text = "";
+    $result = "";
 
-  function conText($text) {
-    $krill = [
-        "№" => "#", "Ц" => "Ts", "Ё" => "Yo", "Е" => "Ye", "Ю" => "Yu", "Э" => "E", "Я" => "Ya",
-        "Ҳ" => "H", "Ў" => "O‘", "Қ" => "Q", "Ғ" => "G‘", "Щ" => "", "Ь" => "", "Ъ" => "’",
-        "Ш" => "Sh", "Ч" => "Ch", "Х" => "X", "Ф" => "F", "У" => "U", "Т" => "T", "С" => "S",
-        "Р" => "R", "П" => "P", "О" => "O", "Н" => "N", "М" => "M", "Л" => "L", "К" => "K",
-        "Й" => "Y", "И" => "I", "З" => "Z", "Ж" => "J", "Д" => "D", "Г" => "G", "В" => "V",
-        "Б" => "B", "А" => "A", "ц" => "ts", "ё" => "yo", "е" => "ye", "ю" => "yu", "э" => "e",
-        "я" => "ya", "ҳ" => "x", "ў" => "o‘", "қ" => "q", "ғ" => "g‘", "щ" => "sh", "ь" => "",
-        "ъ" => "", "ш" => "sh", "ч" => "ch", "х" => "h", "ф" => "f", "у" => "u", "т" => "t",
-        "с" => "s", "р" => "r", "п" => "p", "о" => "o", "н" => "n", "м" => "m", "л" => "l",
-        "к" => "k", "й" => "y", "и" => "i", "з" => "z", "ж" => "j", "д" => "d", "г" => "g",
-        "в" => "v", "б" => "b", "а" => "a"
-    ];
-
-    $latin = array_flip($krill);
-    $harf1 = mb_substr($text, 0, 1);
-
-    if (isset($krill[$harf1])) {
-        $conText = strtr($text, $krill);
-    } elseif (isset($latin[$harf1])) {
-        $conText = strtr($text, $latin);
-    } else {
-        $conText = "Krillcha yoki lotin tilida yozing";
+    if (isset($_POST['bosing'])) {
+      $text = $_POST['inputtext'];
+      $result = conText($text);
     }
-    
-    return $conText;
-  }
 
+    function conText($text) {
+      $krill = [
+          "№" => "#", "Ц" => "Ts", "Ё" => "Yo", "Е" => "Ye", "Ю" => "Yu", "Э" => "E", "Я" => "Ya",
+          "Ҳ" => "H", "Ў" => "O‘", "Қ" => "Q", "Ғ" => "G‘", "Щ" => "Sh", "Ъ" => "’",
+          "Ш" => "Sh", "Ч" => "Ch", "Х" => "X", "Ф" => "F", "У" => "U", "Т" => "T", "С" => "S",
+          "Р" => "R", "П" => "P", "О" => "O", "Н" => "N", "М" => "M", "Л" => "L", "К" => "K",
+          "Й" => "Y", "И" => "I", "З" => "Z", "Ж" => "J", "Д" => "D", "Г" => "G", "В" => "V",
+          "Б" => "B", "А" => "A", "ц" => "ts", "ё" => "yo", "е" => "ye", "ю" => "yu", "э" => "e",
+          "я" => "ya", "ҳ" => "x", "ў" => "o‘", "қ" => "q", "ғ" => "g‘", "щ" => "sh",
+          "ш" => "sh", "ч" => "ch", "х" => "x", "ф" => "f", "у" => "u", "т" => "t",
+          "с" => "s", "р" => "r", "п" => "p", "о" => "o", "н" => "n", "м" => "m", "л" => "l",
+          "к" => "k", "й" => "y", "и" => "i", "з" => "z", "ж" => "j", "д" => "d", "г" => "g",
+          "в" => "v", "б" => "b", "а" => "a"
+      ];
+
+      $latin = array_flip($krill);
+      $harf1 = mb_substr($text, 0, 1);
+
+      if (isset($krill[$harf1])) {
+          $conText = strtr($text, $krill);
+      } elseif (isset($latin[$harf1])) {
+          $conText = strtr($text, $latin);
+      } else {
+          $conText = "Krillcha yoki lotin tilida yozing";
+      }
+      
+      return $conText;
+    }
   ?>
 
   <section class="container">
@@ -109,8 +111,8 @@
           <div class="convertor-body">
             <form action="" method="post">
               <div class="converter-input">
-                <input type="radio" name="select" id="option-1" checked>
-                <input type="radio" name="select" id="option-2">
+                <input type="radio" name="select" id="option-1" value="lotincha" checked>
+                <input type="radio" name="select" id="option-2" value="krillcha">
                   <label for="option-1" class="option option-1">
                       <span>Lotincha</span>
                   </label>
@@ -119,11 +121,11 @@
                   </label>
               </div>
               <div class="converter-content mt-3 px-3">
-                <input type="text" name="text" placeholder="Biror nima yozib ko'ring" value="">
-                <input type="text" name="text" placeholder=". . ." value="">
+                <input type="text" name="inputtext" placeholder="Biror nima yozib ko'ring" value="<?php echo $text; ?>">
+                <input type="text" value="<?php echo $result; ?>">
               </div>
               <div class="converter-button">
-                <input type="submit" class="button btn" value="Click me">
+                <input type="submit" class="button btn" name="bosing" value="Bosing">
               </div>
             </form>
           </div>
