@@ -18,9 +18,9 @@
   if (isset($_POST['bosing'])) {
     $text = $_POST['latin'];
     $result = conText($text);
-}
+  }
 
-function conText($text) {
+  function conText($text) {
     $krill = [
         "№" => "#", "Ц" => "Ts", "Ё" => "Yo", "Е" => "Ye", "Ю" => "Yu", "Э" => "E", "Я" => "Ya",
         "Ҳ" => "H", "Ў" => "O‘", "Қ" => "Q", "Ғ" => "G‘", "Щ" => "", "Ь" => "", "Ъ" => "’",
@@ -29,7 +29,7 @@ function conText($text) {
         "Й" => "Y", "И" => "I", "З" => "Z", "Ж" => "J", "Д" => "D", "Г" => "G", "В" => "V",
         "Б" => "B", "А" => "A", "ц" => "ts", "ё" => "yo", "е" => "ye", "ю" => "yu", "э" => "e",
         "я" => "ya", "ҳ" => "x", "ў" => "o‘", "қ" => "q", "ғ" => "g‘", "щ" => "sh", "ь" => "",
-        "ъ" => "", "ш" => "sh", "ч" => "ch", "х" => "x", "ф" => "f", "у" => "u", "т" => "t",
+        "ъ" => "", "ш" => "sh", "ч" => "ch", "х" => "h", "ф" => "f", "у" => "u", "т" => "t",
         "с" => "s", "р" => "r", "п" => "p", "о" => "o", "н" => "n", "м" => "m", "л" => "l",
         "к" => "k", "й" => "y", "и" => "i", "з" => "z", "ж" => "j", "д" => "d", "г" => "g",
         "в" => "v", "б" => "b", "а" => "a"
@@ -105,33 +105,25 @@ function conText($text) {
         </div>
       </div>
       <div class="convertor">
-        <div class="convertor-header">
-          <div class="d-flex py-3 px-4 justify-content-center">
-            <div class="d-flex align-items-center align-self-center justify-content-center">
-              <div class="convertor-wrapper rounded-pill align-items-center">
-                <form action="" method="post" class="d-flex convertor-form">
-                  <label class="col-6 convertor-label left">
-                    <input type="radio" name="radio" class="convertor-radios py-3" value="lotincha" checked>Lotincha
+        <div class="convertor-wrapper">
+          <div class="convertor-body">
+            <form action="" method="post">
+              <div class="converter-input">
+                <input type="radio" name="select" id="option-1" checked>
+                <input type="radio" name="select" id="option-2">
+                  <label for="option-1" class="option option-1">
+                      <span>Lotincha</span>
                   </label>
-                  <label class="col-6 convertor-label right">
-                    <input type="radio" name="radio" class="convertor-radios py-3" value="krillcha" checked>Криллча
+                  <label for="option-2" class="option option-2">
+                      <span>Krillcha</span>
                   </label>
-                </form>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="convertor-body">
-          <div class="convertor-body_wrap">
-            <form action="" method="POST" class="row mx-auto">
-              <div class="col-6 p-4 pt-5">
-                <input type="text" name="latin" class="convertor_input" value="<?php echo $text; ?>" id="" placeholder="Biror nima yozib ko'ring">
+              <div class="converter-content mt-3 px-3">
+                <input type="text" name="text" placeholder="Biror nima yozib ko'ring" value="">
+                <input type="text" name="text" placeholder=". . ." value="">
               </div>
-              <div class="col-6 p-4 pt-5">
-                <input type="text" name="krill" class="convertor_input" id="" placeholder=". . ." value="<?php echo $result; ?>">
-              </div>
-              <div class="col-12 convertor-body_btn row mx-auto">
-                <input class="btn" type="submit" name="bosing" value="Yuboring">
+              <div class="converter-button">
+                <input type="submit" class="button btn" value="Click me">
               </div>
             </form>
           </div>
